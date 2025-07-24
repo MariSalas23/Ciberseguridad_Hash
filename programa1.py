@@ -372,9 +372,6 @@ passwords = [
             "felix", "washington", "reading", "qqqqqq", "pinkgirl"
         ]
 
-# Palabras que posiblemente contienen las contraseñas
-cont_empresa = ["pollito", "papas", "pollitoconpapas", "kfc", "chicken", "pollo", "pollocampero", "apollo"]
-
 # Lista de hashes (SHA-256)
 lista_hashes = [
   "58a28ba457af0ff65b1ad6107efcc7d461eec2468d0515f89b84315aafcf5e6c",
