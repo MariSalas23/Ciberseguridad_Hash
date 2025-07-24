@@ -25,7 +25,9 @@ inicio = time.time()
 for j in range(1, 100_000_001):
     j_hash = hashlib.sha256(str(j).encode()).hexdigest()
     if j_hash in hashes:
-        print(j, j_hash)
+        # Tiempo individual desde el inicio hasta esta coincidencia
+        t_individual = time.time() - inicio
+        print(j, j_hash, f"({t_individual:.3f} s)")
 
 # Finaliza cronómetro
 fin = time.time()  

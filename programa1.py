@@ -390,18 +390,35 @@ lista_hashes = [
   "09d12e39c87cd5fb629a03888ae37f295026d05bda691764924a710a653710f3"
 ]
 
+set_hashes = set(lista_hashes)
+
 # Inicia cronómetro
 inicio = time.time()
 
-# Ciclo
-for i in range(len(passwords)):
-    for j in range(1995,2026):
-        cadena = passwords[i] + str(j) +"*"
+# Búsqueda de coincidencias
+resultados = []
+for pos, base in enumerate(passwords, start=1):
+    for year in range(1995, 2026):
+        intento = f"{base}{year}*"
         # Código de referencia: user_hash = hashlib.sha256(texto.encode()).hexdigest()
-        cadena_hash = hashlib.sha256(cadena.encode()).hexdigest()
-        if cadena_hash in lista_hashes:
-            print(cadena, cadena_hash, i)
+        h = hashlib.sha256(intento.encode()).hexdigest()
+        if h in set_hashes:
+            t_elapsed = time.time() - inicio
+            resultados.append((intento, h, pos, t_elapsed))
 
 # Finaliza cronómetro
-fin = time.time()  
+fin = time.time()
+
+# Imprime la tabla de resultados
+B = "=" * 100
+
+header = f"{'No.':<4} │ {'PASSWORD':<25} │ {'HASH (SHA-256)':<64} │ {'IDX':>4} │ {'TIEMPO(s)':>9}"
+print(header)
+print("-" * len(header))
+
+for i, (pwd, h, idx, t) in enumerate(resultados, start=1):
+    print(f"{i:<4} │ {pwd:<25} │ {h:<64} │ {idx:>4} │ {t:9.3f}")
+
+print(B)
 print("Tiempo total:", round(fin - inicio, 2), "segundos")
+print(B)
