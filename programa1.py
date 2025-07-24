@@ -4,7 +4,7 @@
 
 # Librerías
 import hashlib
-import random
+import time
 
 # 3000 contraseñas más comunes del archivo rockyou.tx
 passwords = [
@@ -393,6 +393,9 @@ lista_hashes = [
   "09d12e39c87cd5fb629a03888ae37f295026d05bda691764924a710a653710f3"
 ]
 
+# Inicia cronómetro
+inicio = time.time()
+
 # Ciclo
 for i in range(len(passwords)):
     for j in range(1995,2026):
@@ -401,3 +404,7 @@ for i in range(len(passwords)):
         cadena_hash = hashlib.sha256(cadena.encode()).hexdigest()
         if cadena_hash in lista_hashes:
             print(cadena, cadena_hash, i)
+
+# Finaliza cronómetro
+fin = time.time()  
+print("Tiempo total:", round(fin - inicio, 2), "segundos")
